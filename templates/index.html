@@ -1,0 +1,37 @@
+{% extends 'layouts/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}Breast Cancer{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="container">
+        <h3 class="text-center pt-5">Breast Cancer Cell Type Classifier</h3><hr class="my-4">
+        {% if prediction == '[1]' %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Malignant</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% elif prediction == '[0]' %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Benign</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+
+    <form action="{{ url_for('index') }}" method="POST" class="pt-3">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.perimeter) }}
+        {{ wtf.form_field(form.concave_points_mean) }}
+        {{ wtf.form_field(form.texture_mean) }}
+        {{ wtf.form_field(form.smoothness_worst) }}
+        {{ wtf.form_field(form.symmetry_worst) }}
+        {{ wtf.form_field(form.submit) }}
+    </form>
+</div>
+{% endblock %}

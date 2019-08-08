@@ -1,0 +1,5 @@
+.vscode
+venv
+.ipynb_checkpoints
+data.csv
+runapp.py
